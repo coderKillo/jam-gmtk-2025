@@ -21,6 +21,7 @@ var current_stage := Stages.STAGE1
 var plant_type := Plants.BEET
 
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var watered: Sprite2D = $Watered
 @onready var collision: CollisionShape2D = $Area2D/CollisionShape2D
 @onready var area: Area2D = $Area2D
 
@@ -39,6 +40,9 @@ func _ready():
 func _on_day_time_changed(_day_time):
 	collision.disabled = false
 
+	if current_stage == Stages.KILL:
+		queue_free()
+
 
 func _on_day_changed(_day):
 	if current_stage == Stages.EMPTY:
@@ -48,6 +52,7 @@ func _on_day_changed(_day):
 	if is_watered:
 		_next_stage()
 	is_watered = false
+	watered.hide()
 
 
 func harvest():
@@ -81,6 +86,7 @@ func grow():
 		return
 	collision.disabled = true
 	is_watered = true
+	watered.show()
 
 
 func _next_stage():

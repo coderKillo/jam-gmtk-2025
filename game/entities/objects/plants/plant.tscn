@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bu5x716gkextr"]
+[gd_scene load_steps=5 format=3 uid="uid://bu5x716gkextr"]
 
 [ext_resource type="Script" uid="uid://bku0f7dp8rjxo" path="res://game/entities/objects/plants/plant.gd" id="1_k6npq"]
 [ext_resource type="Texture2D" uid="uid://b4s4crj15hpxx" path="res://assets/FarmingCrops16x16/Crop_Spritesheet.png" id="2_fvanm"]
+[ext_resource type="Texture2D" uid="uid://dxc7baamaguyd" path="res://assets/self-made/watered.png" id="3_hrfnm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f6x8u"]
 size = Vector2(12, 16)
@@ -14,9 +15,15 @@ position = Vector2(0, -7)
 texture = ExtResource("2_fvanm")
 hframes = 12
 vframes = 10
-frame = 17
+frame = 9
+
+[node name="Watered" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -8)
+texture = ExtResource("3_hrfnm")
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]

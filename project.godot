@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Looping Planet"
-config/version="1.0.2"
+config/version="1.0.3"
 run/main_scene="uid://cmmq3qk054d8m"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="uid://qmsexcevnq2c"
