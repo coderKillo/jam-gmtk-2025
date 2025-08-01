@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var health = 2
+@export var health = 1
 
 @onready var animation: AnimatedSprite2D = $FullTree/AnimatedSprite2D
 @onready var full: StaticBody2D = $FullTree

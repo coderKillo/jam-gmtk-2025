@@ -76,6 +76,7 @@ mouse_filter = 1
 theme = ExtResource("1_ociif")
 script = ExtResource("1_awp0h")
 level_container = NodePath("World")
+rotation_speed = 6
 
 [node name="World" type="Node2D" parent="."]
 position = Vector2(430, 175)

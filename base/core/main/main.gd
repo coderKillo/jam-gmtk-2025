@@ -85,7 +85,7 @@ func _wait_for_barn_open():
 
 func _running(delta):
 	rotation_axis.rotation_degrees -= rotation_speed * delta
-	if player.rotation_degrees >= 360:
+	if player.rotation_degrees >= 360 or rotation_axis.rotation_degrees >= 360:
 		player.rotation_degrees = 0
 		rotation_axis.rotation_degrees = 0
 		_close_barn()
@@ -141,7 +141,7 @@ func _set_day_time(day_time: Global.DayTime):
 			background.modulate.v = 0.6
 		Global.DayTime.NIGHT:
 			background.modulate.v = 0.4
-	Events.day_changed.emit(current_day_time)
+	Events.day_time_changed.emit(current_day_time)
 
 
 func _next_day():
