@@ -15,8 +15,6 @@ func _ready():
 	%Quit.pressed.connect(_on_quit_pressed)
 	%Back.pressed.connect(_on_back_pressed)
 
-	$ConfimNewGame.confirmed.connect(_on_new_game_confirmed)
-
 	$Version.text = GameState.get_version()
 
 	if OS.has_feature("web"):
@@ -35,23 +33,15 @@ func _on_back_pressed():
 
 
 func _on_continue_pressed():
-	SceneManager.load_level(GameState.get_current_level())
+	pass
 
 
 func _on_new_game_pressed():
-	if GameState.get_max_level_reached() >= 0:
-		$ConfimNewGame.popup_centered()
-	else:
-		_on_new_game_confirmed()
-
-
-func _on_new_game_confirmed():
-	GameState.reset()
-	SceneManager.load_level(GameState.get_current_level())
+	SceneManager.load_game_scene()
 
 
 func _on_level_select_pressed():
-	_open_sub_menu($LevelSelect)
+	pass
 
 
 func _on_quit_pressed():

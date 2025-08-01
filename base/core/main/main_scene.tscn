@@ -1,8 +1,62 @@
-[gd_scene load_steps=2 format=3 uid="uid://b6pacd4qux0r0"]
+[gd_scene load_steps=25 format=3 uid="uid://b6pacd4qux0r0"]
 
 [ext_resource type="Script" uid="uid://xwkwmj6gqkg7" path="res://base/core/main/main.gd" id="1_awp0h"]
+[ext_resource type="Theme" uid="uid://4r6b2cnujbph" path="res://assets/gui_assets/waste_no_space.theme" id="1_ociif"]
+[ext_resource type="PackedScene" uid="uid://dgloop1ji17cr" path="res://game/world/planet/planet.tscn" id="2_6lyvc"]
+[ext_resource type="Texture2D" uid="uid://d4d5bds5lvgdy" path="res://assets/self-made/Background.png" id="2_ma400"]
+[ext_resource type="PackedScene" uid="uid://gp1f80ye7r1" path="res://game/entities/player/player.tscn" id="3_6lyvc"]
+[ext_resource type="PackedScene" uid="uid://cbpchiov2dbtr" path="res://game/core/spawner.tscn" id="4_6lyvc"]
+[ext_resource type="Texture2D" uid="uid://dkkb20y1mtvw8" path="res://assets/self-made/day-night.png" id="5_dn4rf"]
+[ext_resource type="Texture2D" uid="uid://djiafpuulp2gt" path="res://assets/self-made/frame2.png" id="7_6icyu"]
+[ext_resource type="Script" uid="uid://b0x1gofot2sj3" path="res://base/core/main/gui.gd" id="7_x0q8c"]
+[ext_resource type="Texture2D" uid="uid://da3s02lllgmnm" path="res://assets/self-made/coin.png" id="8_ugwa6"]
+[ext_resource type="Texture2D" uid="uid://civwhmh187e0c" path="res://assets/self-made/frame.png" id="11_3p8nd"]
+[ext_resource type="Texture2D" uid="uid://b6q6y7vllww0x" path="res://assets/self-made/tools.png" id="12_bicih"]
+[ext_resource type="Texture2D" uid="uid://cvhh7qjpe24qy" path="res://assets/self-made/select_animation/select4.png" id="13_0h0lk"]
+[ext_resource type="Texture2D" uid="uid://b2us6whhhlrfw" path="res://assets/self-made/select_animation/select3.png" id="14_oh5ki"]
+[ext_resource type="Texture2D" uid="uid://biq2au2dlrxfn" path="res://assets/self-made/select_animation/select2.png" id="15_4jeu6"]
+[ext_resource type="Texture2D" uid="uid://cdx7b342g5nbw" path="res://assets/self-made/select_animation/select1.png" id="16_gjp0b"]
 
-[node name="MainScene" type="Control" node_paths=PackedStringArray("level_container", "gui")]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ma400"]
+atlas = ExtResource("5_dn4rf")
+region = Rect2(0, 0, 48, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dn4rf"]
+atlas = ExtResource("5_dn4rf")
+region = Rect2(48, 0, 48, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ociif"]
+atlas = ExtResource("5_dn4rf")
+region = Rect2(96, 0, 48, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6icyu"]
+atlas = ExtResource("5_dn4rf")
+region = Rect2(144, 0, 48, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w3pcb"]
+atlas = ExtResource("12_bicih")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cyqf4"]
+atlas = ExtResource("12_bicih")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ax4ej"]
+atlas = ExtResource("12_bicih")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_oh5ki"]
+frames = 4
+frame_0/texture = ExtResource("13_0h0lk")
+frame_0/duration = 0.2
+frame_1/texture = ExtResource("14_oh5ki")
+frame_1/duration = 0.2
+frame_2/texture = ExtResource("15_4jeu6")
+frame_2/duration = 0.2
+frame_3/texture = ExtResource("16_gjp0b")
+frame_3/duration = 0.2
+
+[node name="MainScene" type="Control" node_paths=PackedStringArray("level_container")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,17 +64,41 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+theme = ExtResource("1_ociif")
 script = ExtResource("1_awp0h")
 level_container = NodePath("World")
-gui = NodePath("CanvasLayer/Gui")
 
 [node name="World" type="Node2D" parent="."]
 position = Vector2(430, 175)
+
+[node name="Background" type="Sprite2D" parent="World"]
+scale = Vector2(2, 2)
+texture = ExtResource("2_ma400")
+
+[node name="Camera2D" type="Camera2D" parent="World"]
+position = Vector2(0, -42)
+
+[node name="RotationAxis" type="Node2D" parent="World"]
+unique_name_in_owner = true
+position = Vector2(0, 512)
+
+[node name="Planet" parent="World/RotationAxis" instance=ExtResource("2_6lyvc")]
+unique_name_in_owner = true
+
+[node name="Player" parent="World/RotationAxis" instance=ExtResource("3_6lyvc")]
+unique_name_in_owner = true
+gravity = 980
+
+[node name="Spawner" parent="World" instance=ExtResource("4_6lyvc")]
+unique_name_in_owner = true
+position = Vector2(0, 512)
+rotation = 0.767945
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2
 
 [node name="Gui" type="Control" parent="CanvasLayer"]
+unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,9 +106,208 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+theme = ExtResource("1_ociif")
+script = ExtResource("7_x0q8c")
 
-[node name="Label" type="Label" parent="CanvasLayer/Gui"]
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Gui"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "Healt: 100"
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 83.0
+offset_bottom = 22.0
+texture = ExtResource("7_6icyu")
+region_rect = Rect2(0, 0, 26, 26)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Gui/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Gui/NinePatchRect/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Gui/NinePatchRect/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("8_ugwa6")
+
+[node name="ScoreText" type="Label" parent="CanvasLayer/Gui/NinePatchRect/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 0
+text = "100000"
+
+[node name="DayTime" type="Control" parent="CanvasLayer/Gui"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="Early" type="TextureRect" parent="CanvasLayer/Gui/DayTime"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+texture = SubResource("AtlasTexture_ma400")
+
+[node name="Mid" type="TextureRect" parent="CanvasLayer/Gui/DayTime"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+texture = SubResource("AtlasTexture_dn4rf")
+
+[node name="Late" type="TextureRect" parent="CanvasLayer/Gui/DayTime"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+texture = SubResource("AtlasTexture_ociif")
+
+[node name="Night" type="TextureRect" parent="CanvasLayer/Gui/DayTime"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+texture = SubResource("AtlasTexture_6icyu")
+
+[node name="ToolSelection" type="Control" parent="CanvasLayer/Gui"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -53.055
+offset_top = -43.12
+offset_right = -13.055
+offset_bottom = -3.12
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Gui/ToolSelection"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 82.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BagSeed" type="MarginContainer" parent="CanvasLayer/Gui/ToolSelection/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Gui/ToolSelection/HBoxContainer/BagSeed"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("11_3p8nd")
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Gui/ToolSelection/HBoxContainer/BagSeed"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_w3pcb")
+
+[node name="WateringCan" type="MarginContainer" parent="CanvasLayer/Gui/ToolSelection/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Gui/ToolSelection/HBoxContainer/WateringCan"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("11_3p8nd")
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Gui/ToolSelection/HBoxContainer/WateringCan"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_cyqf4")
+
+[node name="GrainSickle" type="MarginContainer" parent="CanvasLayer/Gui/ToolSelection/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Gui/ToolSelection/HBoxContainer/GrainSickle"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("11_3p8nd")
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Gui/ToolSelection/HBoxContainer/GrainSickle"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_ax4ej")
+
+[node name="Select_Animation" type="TextureRect" parent="CanvasLayer/Gui/ToolSelection"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AnimatedTexture_oh5ki")

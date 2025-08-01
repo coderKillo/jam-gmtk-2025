@@ -1,0 +1,165 @@
+[gd_scene load_steps=20 format=3 uid="uid://bi3o16ms7ylkc"]
+
+[ext_resource type="Script" uid="uid://ldsygxp7rwdq" path="res://game/entities/objects/trees/tree.gd" id="1_faqe7"]
+[ext_resource type="Texture2D" uid="uid://co657d4gyv64d" path="res://assets/pixel tree asset/Tree2_anim_sheet_ns.png" id="3_lqky1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lqky1"]
+atlas = ExtResource("3_lqky1")
+region = Rect2(0, 192, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sshsl"]
+atlas = ExtResource("3_lqky1")
+region = Rect2(48, 192, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_syfdc"]
+atlas = ExtResource("3_lqky1")
+region = Rect2(0, 256, 144, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g4vbr"]
+atlas = ExtResource("3_lqky1")
+region = Rect2(0, 320, 144, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4hmmd"]
+atlas = ExtResource("3_lqky1")
+region = Rect2(0, 384, 144, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_co6iy"]
+atlas = ExtResource("3_lqky1")
+region = Rect2(0, 448, 144, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5gqoy"]
+atlas = ExtResource("3_lqky1")
+region = Rect2(0, 512, 144, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_louev"]
+atlas = ExtResource("3_lqky1")
+region = Rect2(0, 128, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7gkcn"]
+atlas = ExtResource("3_lqky1")
+region = Rect2(48, 128, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rta2q"]
+atlas = ExtResource("3_lqky1")
+region = Rect2(96, 128, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fxfwx"]
+atlas = ExtResource("3_lqky1")
+region = Rect2(144, 128, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ur5n"]
+atlas = ExtResource("3_lqky1")
+region = Rect2(192, 128, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_faqe7"]
+atlas = ExtResource("3_lqky1")
+region = Rect2(0, 0, 48, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_syfdc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lqky1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sshsl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_syfdc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g4vbr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4hmmd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_co6iy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5gqoy")
+}],
+"loop": false,
+"name": &"fall",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_louev")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7gkcn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rta2q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fxfwx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ur5n")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_faqe7")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f6x8u"]
+size = Vector2(12, 56)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_faqe7"]
+size = Vector2(12, 19)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lqky1"]
+size = Vector2(12, 8)
+
+[node name="Tree" type="Node2D"]
+script = ExtResource("1_faqe7")
+
+[node name="FullTree" type="StaticBody2D" parent="."]
+visible = false
+position = Vector2(0, -28)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="FullTree"]
+sprite_frames = SubResource("SpriteFrames_syfdc")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FullTree"]
+shape = SubResource("RectangleShape2D_f6x8u")
+disabled = true
+
+[node name="SmallTree" type="StaticBody2D" parent="."]
+position = Vector2(0, -28)
+
+[node name="Sprite2D" type="Sprite2D" parent="SmallTree"]
+texture = ExtResource("3_lqky1")
+region_enabled = true
+region_rect = Rect2(96, 0, 48, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SmallTree"]
+position = Vector2(0, 18.5)
+shape = SubResource("RectangleShape2D_faqe7")
+
+[node name="Stamp" type="StaticBody2D" parent="."]
+visible = false
+position = Vector2(0, -27)
+
+[node name="Sprite2D" type="Sprite2D" parent="Stamp"]
+position = Vector2(0, -1)
+texture = ExtResource("3_lqky1")
+region_enabled = true
+region_rect = Rect2(48, 0, 48, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stamp"]
+position = Vector2(0, 23)
+shape = SubResource("RectangleShape2D_lqky1")
+disabled = true
