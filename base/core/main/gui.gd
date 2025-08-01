@@ -63,7 +63,11 @@ func start_selection():
 	tool_selection.show()
 
 
-func get_selected_tool() -> Global.DayTime:
+func is_selecting():
+	return tool_selection.visible
+
+
+func get_selected_tool() -> Global.Tools:
 	return tool_textures[_selected_position].id
 
 

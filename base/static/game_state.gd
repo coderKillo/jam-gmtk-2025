@@ -63,5 +63,19 @@ static func set_current_level(level_number: int) -> void:
 	save()
 
 
+static func set_current_score(score: int) -> void:
+	current.highscore = max(score, current.highscore)
+	current.score = score
+	save()
+
+
+static func get_score() -> int:
+	return current.score
+
+
+static func get_highscore() -> int:
+	return current.highscore
+
+
 static func start_game() -> void:
 	save()

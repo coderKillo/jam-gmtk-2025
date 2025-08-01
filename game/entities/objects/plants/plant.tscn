@@ -1,21 +1,24 @@
 [gd_scene load_steps=4 format=3 uid="uid://bu5x716gkextr"]
 
-[ext_resource type="Texture2D" uid="uid://ch4h8110ll8ux" path="res://addons/godot-prototype-texture/Vector/grid_512x512/grid_white_512x512.svg" id="1_f6x8u"]
 [ext_resource type="Script" uid="uid://bku0f7dp8rjxo" path="res://game/entities/objects/plants/plant.gd" id="1_k6npq"]
+[ext_resource type="Texture2D" uid="uid://b4s4crj15hpxx" path="res://assets/FarmingCrops16x16/Crop_Spritesheet.png" id="2_fvanm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f6x8u"]
-size = Vector2(26, 26)
+size = Vector2(12, 16)
 
 [node name="Plant" type="Node2D"]
 script = ExtResource("1_k6npq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -12)
-scale = Vector2(0.05, 0.05)
-texture = ExtResource("1_f6x8u")
+position = Vector2(0, -7)
+texture = ExtResource("2_fvanm")
+hframes = 12
+vframes = 10
+frame = 17
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -12)
+position = Vector2(0, -7)
 shape = SubResource("RectangleShape2D_f6x8u")

@@ -5,7 +5,7 @@
 
 [node name="Cloude" type="Node2D"]
 script = ExtResource("1_yrjs4")
-rotation_speed_range = Vector2(3, -3)
+rotation_speed_range = Vector2(0, -3)
 radius_range = Vector2(-580, -650)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

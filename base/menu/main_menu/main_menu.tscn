@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://cmmq3qk054d8m"]
+[gd_scene load_steps=8 format=3 uid="uid://cmmq3qk054d8m"]
 
 [ext_resource type="Script" uid="uid://dcr3vuytcemx4" path="res://base/menu/main_menu/main_menu.gd" id="1_1jjd6"]
 [ext_resource type="Theme" uid="uid://4r6b2cnujbph" path="res://assets/gui_assets/waste_no_space.theme" id="1_lue4o"]
 [ext_resource type="Script" uid="uid://c176p1imvld44" path="res://base/menu/main_menu/option_menu.gd" id="2_byskk"]
 [ext_resource type="Script" uid="uid://mhomivb5vuru" path="res://base/menu/main_menu/level_select.gd" id="3_luyhs"]
+[ext_resource type="AudioStream" uid="uid://db7y14mlyu0gn" path="res://assets/music/Komiku - It&#039;s time for adventure vol 2 - 02 Chill Out Theme.mp3" id="3_obtv4"]
+[ext_resource type="Texture2D" uid="uid://d4d5bds5lvgdy" path="res://assets/self-made/Background.png" id="3_rk3xn"]
+[ext_resource type="Texture2D" uid="uid://btsoslnqtx5be" path="res://assets/self-made/title.png" id="4_xq2ug"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -16,6 +19,9 @@ theme = ExtResource("1_lue4o")
 script = ExtResource("1_1jjd6")
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_obtv4")
+autoplay = true
+bus = &"Music"
 
 [node name="Menu" type="Control" parent="."]
 layout_mode = 1
@@ -32,21 +38,20 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("3_rk3xn")
 
-[node name="Label" type="Label" parent="Menu"]
+[node name="Title" type="TextureRect" parent="Menu"]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -90.0
-offset_top = 50.0
-offset_right = 90.0
-offset_bottom = 92.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 65.0
+offset_top = 9.0
+offset_right = -67.0
+offset_bottom = -89.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 50
-text = "Looping Planet"
-horizontal_alignment = 1
-vertical_alignment = 1
+grow_vertical = 2
+texture = ExtResource("4_xq2ug")
 
 [node name="MarginContainer" type="MarginContainer" parent="Menu"]
 layout_mode = 1
@@ -61,12 +66,12 @@ offset_right = 49.5
 offset_bottom = 135.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_top = 100
+theme_override_constants/margin_top = 140
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Menu/MarginContainer"]
-custom_minimum_size = Vector2(120, 0)
+custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 5
 
 [node name="Continue" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -261,15 +266,14 @@ columns = 5
 
 [node name="Back" type="Button" parent="."]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(60, 0)
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 10.0
-offset_top = -40.0
+offset_top = -36.115
 offset_right = 70.0
-offset_bottom = -9.0
+offset_bottom = -16.115
 grow_vertical = 0
 size_flags_horizontal = 0
 text = "back"

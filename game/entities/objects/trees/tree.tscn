@@ -127,6 +127,7 @@ script = ExtResource("1_faqe7")
 [node name="FullTree" type="StaticBody2D" parent="."]
 visible = false
 position = Vector2(0, -28)
+collision_layer = 3
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="FullTree"]
 sprite_frames = SubResource("SpriteFrames_syfdc")
@@ -139,6 +140,7 @@ disabled = true
 
 [node name="SmallTree" type="StaticBody2D" parent="."]
 position = Vector2(0, -28)
+collision_layer = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="SmallTree"]
 texture = ExtResource("3_lqky1")
@@ -152,6 +154,7 @@ shape = SubResource("RectangleShape2D_faqe7")
 [node name="Stamp" type="StaticBody2D" parent="."]
 visible = false
 position = Vector2(0, -27)
+collision_layer = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Stamp"]
 position = Vector2(0, -1)

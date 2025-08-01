@@ -22,3 +22,5 @@ License: [MIT License](https://github.com/godotengine/godot/blob/master/LICENSE.
 https://aimmaga.itch.io/darksamurai
 https://opengameart.org/content/farming-crops-16x16
 https://helm3t.itch.io/free-pixel-tree-pack-helm3t
+https://ggbot.itch.io/kaph-font
+https://opengameart.org/content/chill-out-theme

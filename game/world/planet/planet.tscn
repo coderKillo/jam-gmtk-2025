@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dgloop1ji17cr"]
+[gd_scene load_steps=13 format=3 uid="uid://dgloop1ji17cr"]
 
 [ext_resource type="Script" uid="uid://dw10ebusn0g2a" path="res://game/world/planet/planet.gd" id="1_tvli3"]
 [ext_resource type="Texture2D" uid="uid://bucwmeusfql6d" path="res://assets/self-made/white-circle.png" id="2_73vdt"]
@@ -70,11 +70,14 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_3y0nw"]
 radius = 509.943
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_el1qy"]
+size = Vector2(90.5, 17)
+
 [node name="Planet" type="Node2D"]
 script = ExtResource("1_tvli3")
+spawn_radius = 512
 
 [node name="Clouds" type="Node2D" parent="."]
-rotation = 0.980875
 
 [node name="Cloude" parent="Clouds" instance=ExtResource("4_71g72")]
 
@@ -147,6 +150,26 @@ radius_range = Vector2(-550, -600)
 rotation = 4.90263
 radius_range = Vector2(-550, -600)
 
+[node name="Cloude22" parent="Clouds" instance=ExtResource("4_71g72")]
+rotation = 4.90263
+radius_range = Vector2(-550, -600)
+
+[node name="Cloude23" parent="Clouds" instance=ExtResource("4_71g72")]
+rotation = 5.4367
+radius_range = Vector2(-550, -600)
+
+[node name="Cloude24" parent="Clouds" instance=ExtResource("4_71g72")]
+rotation = 4.90263
+radius_range = Vector2(-550, -600)
+
+[node name="Cloude25" parent="Clouds" instance=ExtResource("4_71g72")]
+rotation = -0.499164
+radius_range = Vector2(-550, -600)
+
+[node name="Cloude26" parent="Clouds" instance=ExtResource("4_71g72")]
+rotation = 0.670206
+radius_range = Vector2(-550, -600)
+
 [node name="Barn" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -541)
 sprite_frames = SubResource("SpriteFrames_iucgg")
@@ -169,3 +192,11 @@ texture_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("CircleShape2D_3y0nw")
+
+[node name="SlotChecker" type="Area2D" parent="."]
+rotation = -0.785398
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SlotChecker"]
+position = Vector2(550.75, 0)
+shape = SubResource("RectangleShape2D_el1qy")

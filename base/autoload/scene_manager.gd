@@ -4,15 +4,18 @@ extends Node
 
 var main: Main
 var current_level: Node
+var pause_menu: OverlaidMenu
 
 
 func _ready():
 	Events.level_won.connect(_on_game_won)
 	Events.level_lose.connect(_on_game_lose)
 
+	process_mode = Node.PROCESS_MODE_ALWAYS
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_released("ui_cancel"):
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
 		_pause_game()
 
 
@@ -87,5 +90,8 @@ func _pause_game():
 	if not is_instance_valid(main):
 		return
 
-	var scene = scene_resource.pause_menu.instantiate()
-	main.gui.add_child(scene)
+	if is_instance_valid(pause_menu):
+		pause_menu.close()
+	else:
+		pause_menu = scene_resource.pause_menu.instantiate()
+		main.gui.add_child(pause_menu)

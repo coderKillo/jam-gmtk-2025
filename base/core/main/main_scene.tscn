@@ -1,9 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://b6pacd4qux0r0"]
+[gd_scene load_steps=28 format=3 uid="uid://b6pacd4qux0r0"]
 
 [ext_resource type="Script" uid="uid://xwkwmj6gqkg7" path="res://base/core/main/main.gd" id="1_awp0h"]
 [ext_resource type="Theme" uid="uid://4r6b2cnujbph" path="res://assets/gui_assets/waste_no_space.theme" id="1_ociif"]
 [ext_resource type="PackedScene" uid="uid://dgloop1ji17cr" path="res://game/world/planet/planet.tscn" id="2_6lyvc"]
-[ext_resource type="Texture2D" uid="uid://d4d5bds5lvgdy" path="res://assets/self-made/Background.png" id="2_ma400"]
+[ext_resource type="Texture2D" uid="uid://3uyj5nn0dgxg" path="res://assets/self-made/Background_ingame.png" id="3_0h0lk"]
 [ext_resource type="PackedScene" uid="uid://gp1f80ye7r1" path="res://game/entities/player/player.tscn" id="3_6lyvc"]
 [ext_resource type="PackedScene" uid="uid://cbpchiov2dbtr" path="res://game/core/spawner.tscn" id="4_6lyvc"]
 [ext_resource type="Texture2D" uid="uid://dkkb20y1mtvw8" path="res://assets/self-made/day-night.png" id="5_dn4rf"]
@@ -16,6 +16,15 @@
 [ext_resource type="Texture2D" uid="uid://b2us6whhhlrfw" path="res://assets/self-made/select_animation/select3.png" id="14_oh5ki"]
 [ext_resource type="Texture2D" uid="uid://biq2au2dlrxfn" path="res://assets/self-made/select_animation/select2.png" id="15_4jeu6"]
 [ext_resource type="Texture2D" uid="uid://cdx7b342g5nbw" path="res://assets/self-made/select_animation/select1.png" id="16_gjp0b"]
+[ext_resource type="AudioStream" uid="uid://db7y14mlyu0gn" path="res://assets/music/Komiku - It&#039;s time for adventure vol 2 - 02 Chill Out Theme.mp3" id="17_oh5ki"]
+
+[sub_resource type="Environment" id="Environment_0h0lk"]
+glow_intensity = 4.25
+adjustment_enabled = true
+adjustment_brightness = 3.5
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0h0lk"]
+size = Vector2(1420, 417)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ma400"]
 atlas = ExtResource("5_dn4rf")
@@ -71,12 +80,16 @@ level_container = NodePath("World")
 [node name="World" type="Node2D" parent="."]
 position = Vector2(430, 175)
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = SubResource("Environment_0h0lk")
+
 [node name="Background" type="Sprite2D" parent="World"]
+modulate = Color(0.85, 0.85, 0.85, 1)
 scale = Vector2(2, 2)
-texture = ExtResource("2_ma400")
+texture = ExtResource("3_0h0lk")
 
 [node name="Camera2D" type="Camera2D" parent="World"]
-position = Vector2(0, -42)
+position = Vector2(-4, -50)
 
 [node name="RotationAxis" type="Node2D" parent="World"]
 unique_name_in_owner = true
@@ -91,8 +104,15 @@ gravity = 980
 
 [node name="Spawner" parent="World" instance=ExtResource("4_6lyvc")]
 unique_name_in_owner = true
-position = Vector2(0, 512)
+position = Vector2(357, 140)
 rotation = 0.767945
+
+[node name="DeathZone" type="Area2D" parent="World"]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/DeathZone"]
+position = Vector2(1, 239.5)
+shape = SubResource("RectangleShape2D_0h0lk")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2
@@ -311,3 +331,8 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("AnimatedTexture_oh5ki")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_oh5ki")
+autoplay = true
+bus = &"Music"
